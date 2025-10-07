@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday, Nandu! 💖</title>
+<style>
+  :root{
+    --bg1:#ffd9e8;
+    --bg2:#ffeedd;
+    --accent:#ff6a95;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:"Poppins","Comic Sans MS",sans-serif;
+    background:linear-gradient(180deg,var(--bg1),var(--bg2));
+    -webkit-font-smoothing:antialiased;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+    opacity:0;
+    animation:fadeIn 1.5s ease-in-out forwards;
+  }
+  @keyframes fadeIn{to{opacity:1}}
+
+  /* floating gradient animation */
+  @keyframes bgShift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+  body{
+    background:linear-gradient(-45deg,#ffd9e8,#ffeedd,#ffe1f0,#fff0f6);
+    background-size:400% 400%;
+    animation:bgShift 12s ease infinite,fadeIn 1.2s ease forwards;
+  }
+
+  .card{
+    width:92vw;max-width:960px;height:82vh;border-radius:20px;
+    background:rgba(255,255,255,0.4);
+    box-shadow:0 25px 60px rgba(255,106,149,0.25);
+    overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.3);
+    transition:transform 0.5s;
+  }
+  .card:hover{transform:scale(1.01);}
+  .topbar{padding:18px 26px;display:flex;justify-content:space-between;align-items:center}
+  .logo{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#ff9ab3,#ff6a95);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 4px 14px rgba(255,106,149,0.25)}
+  .title{font-weight:700;color:#3b2a2a}
+  .nav button{background:transparent;border:0;padding:8px 12px;border-radius:20px;font-weight:600;cursor:pointer;color:#3b2a2a;transition:0.25s}
+  .nav button.active{background:var(--accent);color:#fff;transform:translateY(-2px);box-shadow:0 6px 14px rgba(255,106,149,0.3)}
+
+  .pages{position:relative;height:100%}
+  .page{position:absolute;inset:0;padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity 0.6s,transform 0.6s}
+  .page.hidden{opacity:0;transform:scale(0.96);pointer-events:none}
+
+  h1{font-size:34px;color:#3b2a2a;text-shadow:0 6px 30px rgba(255,106,149,0.15)}
+  p{color:#4a3b3b;max-width:800px;font-size:18px;line-height:1.5}
+
+  .start-btn,.surprise-btn{
+    margin-top:20px;padding:12px 28px;border:none;border-radius:999px;
+    background:linear-gradient(90deg,#ff6a95,#ff9ab3);color:white;
+    font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(255,106,149,0.25);
+    transition:0.3s;
+  }
+  .start-btn:hover,.surprise-btn:hover{transform:scale(1.07)}
+
+  .heart{position:absolute;width:30px;height:30px;transform:rotate(45deg);background:linear-gradient(180deg,#ff6a95,#ff9ab3);border-radius:8px;opacity:0.9}
+  .heart:before,.heart:after{content:"";position:absolute;width:30px;height:30px;background:inherit;border-radius:50%}
+  .heart:before{top:-15px;left:0}.heart:after{left:15px;top:0}
+
+  canvas{position:absolute;inset:0;z-index:5;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="logo">N</div>
+      <div><div class="title">Happy Birthday Nandu 💖</div><small style="color:#7b5b5b">Made with love</small></div>
+    </div>
+    <div class="nav">
+      <button data-page="cover" class="active">Cover</button>
+      <button data-page="wishes">Wishes</button>
+      <button data-page="why">Why</button>
+      <button data-page="surprise">Surprise</button>
+    </div>
+  </div>
+
+  <div class="pages">
+    <section class="page cover" data-name="cover">
+      <h1>Happy Birthday, Nandu! 💝</h1>
+      <p>Every smile of yours is magic. Today, let’s celebrate <strong>you</strong> — your warmth, your laughter, and your light. 🌸</p>
+      <button class="start-btn" data-nav="wishes">Open My Gift 🎁</button>
+    </section>
+
+    <section class="page hidden" data-name="wishes">
+      <h1>Wishes for Nandu ✨</h1>
+      <p>"You are my today and all of my tomorrows."<br>“Count your life by smiles, not tears.”<br>“Keep shining, beautiful soul.”</p>
+      <button class="start-btn" data-nav="why">Next ➜</button>
+    </section>
+
+    <section class="page hidden" data-name="why">
+      <h1>Why Birthdays are Special 🎂</h1>
+      <p>Because they remind us how far we’ve come, how loved we are, and how many hearts smile because of us. 💕<br><br>And Nandu, you’re that reason for many smiles.</p>
+      <button class="start-btn" data-nav="surprise">Show Surprise 🎇</button>
+    </section>
+
+    <section class="page hidden" data-name="surprise">
+      <h1>Surprise Time 🎊</h1>
+      <p>Click below for a colorful shower of love and confetti! 💖</p>
+      <button class="surprise-btn" id="surpriseBtn">Celebrate 🎆</button>
+    </section>
+  </div>
+
+  <canvas id="confetti"></canvas>
+  <div id="float"></div>
+</div>
+
+<script>
+const navBtns=document.querySelectorAll('.nav button');
+const pages=document.querySelectorAll('.page');
+function showPage(n){pages.forEach(p=>p.classList.toggle('hidden',p.dataset.name!==n));navBtns.forEach(b=>b.classList.toggle('active',b.dataset.page===n));if(n==='wishes')for(let i=0;i<8;i++)makeHeart();}
+navBtns.forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+document.querySelectorAll('[data-nav]').forEach(x=>x.onclick=()=>showPage(x.dataset.nav));
+showPage('cover');
+
+/* Floating hearts */
+const fl=document.getElementById('float');
+function makeHeart(){
+  const h=document.createElement('div');h.className='heart';
+  h.style.left=Math.random()*100+'vw';h.style.bottom='-20px';
+  const dur=4+Math.random()*3;
+  h.style.transition=`transform ${dur}s linear,opacity ${dur}s`;
+  fl.appendChild(h);
+  requestAnimationFrame(()=>{h.style.transform=`translate(${Math.random()*40-20}vw,-120vh) rotate(${Math.random()*720}deg)`;h.style.opacity=0;});
+  setTimeout(()=>h.remove(),dur*1000);
+}
+
+/* Confetti */
+const canvas=document.getElementById('confetti'),ctx=canvas.getContext('2d');
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}resize();addEventListener('resize',resize);
+let conf=[];
+function Conf(){this.x=Math.random()*canvas.width;this.y=-10;this.color=`hsl(${Math.random()*360},70%,60%)`;this.size=6;this.vx=Math.random()*4-2;this.vy=2+Math.random()*4;}
+Conf.prototype.draw=function(){ctx.fillStyle=this.color;ctx.fillRect(this.x,this.y,this.size,this.size);}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);conf.forEach(c=>{c.x+=c.vx;c.y+=c.vy;if(c.y>canvas.height)c.y=-10;c.draw();});requestAnimationFrame(animate);}
+animate();
+document.getElementById('surpriseBtn').onclick=()=>{
+  for(let i=0;i<300;i++)conf.push(new Conf());
+  for(let i=0;i<20;i++)makeHeart();
+  alert("Happy Birthday Nandu! 💖 You mean the world 🌍✨");
+};
+</script>
+</body>
+</html>
